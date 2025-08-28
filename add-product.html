@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - Naturialis</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#faf6ff',
+                            100: '#f4ebff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        natural: {
+                            50: '#f7fee7',
+                            100: '#ecfccb',
+                            200: '#d9f99d',
+                            300: '#bef264',
+                            400: '#a3e635',
+                            500: '#84cc16',
+                            600: '#65a30d',
+                            700: '#4d7c0f',
+                            800: '#3f6212',
+                            900: '#365314',
+                        }
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass-effect {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(209, 213, 219, 0.3);
+        }
+        
+        .dark .glass-effect {
+            background-color: rgba(17, 24, 39, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .card-hover:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 font-lato transition-colors duration-300 min-h-screen">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 gradient-bg">
+        <nav class="glass-effect px-6 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-playfair font-bold text-white">Naturialis Dashboard</a>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+                        <i class="fas fa-moon text-white"></i>
+                    </button>
+                    <div class="flex items-center space-x-3 bg-white/20 rounded-full px-4 py-2 backdrop-blur-sm">
+                        <span class="text-white font-medium">Admin User</span>
+                        <div class="w-8 h-8 bg-white/30 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <div class="max-w-4xl mx-auto px-6">
+            <!-- Page Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-playfair font-bold text-gray-800 dark:text-white mb-4">
+                    Add New Product
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400 text-lg">
+                    Create a new product listing for your natural products store
+                </p>
+            </div>
+
+            <!-- Product Form -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+                <form id="add-product-form" class="space-y-6">
+                    <!-- Product Name -->
+                    <div>
+                        <label for="product-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Product Name *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="product-name" 
+                            name="product-name"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                            placeholder="e.g., Organic Coconut Oil"
+                        >
+                    </div>
+
+                    <!-- Product Price -->
+                    <div>
+                        <label for="product-price" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Price ($) *
+                        </label>
+                        <input 
+                            type="number" 
+                            id="product-price" 
+                            name="product-price"
+                            required
+                            min="0"
+                            step="0.01"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                            placeholder="e.g., 24.99"
+                        >
+                    </div>
+
+                    <!-- Product Image URL -->
+                    <div>
+                        <label for="product-image" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Image URL *
+                        </label>
+                        <input 
+                            type="url" 
+                            id="product-image" 
+                            name="product-image"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                            placeholder="e.g., https://example.com/image.jpg"
+                        >
+                    </div>
+
+                    <!-- Product Description -->
+                    <div>
+                        <label for="product-description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Description
+                        </label>
+                        <textarea 
+                            id="product-description" 
+                            name="product-description"
+                            rows="4"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                            placeholder="Describe your product..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Product Category -->
+                    <div>
+                        <label for="product-category" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Category
+                        </label>
+                        <select 
+                            id="product-category" 
+                            name="product-category"
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors"
+                        >
+                            <option value="">Select a category</option>
+                            <option value="skincare">Skincare</option>
+                            <option value="haircare">Haircare</option>
+                            <option value="wellness">Wellness</option>
+                            <option value="supplements">Supplements</option>
+                            <option value="essential-oils">Essential Oils</option>
+                        </select>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button 
+                            type="submit" 
+                            class="flex-1 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center"
+                        >
+                            <i class="fas fa-plus mr-2"></i>
+                            Add Product
+                        </button>
+                        <a 
+                            href="index.html" 
+                            class="flex-1 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 text-gray-800 dark:text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center no-underline text-center"
+                        >
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Back to Dashboard
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 p-4 transform translate-x-full transition-transform duration-300">
+        <div class="flex items-center justify-between">
+            <span id="notification-message" class="text-gray-800 dark:text-white"></span>
+            <button class="ml-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="hideNotification()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // Notification Functions
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const messageElement = document.getElementById('notification-message');
+            
+            messageElement.textContent = message;
+            notification.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                hideNotification();
+            }, 3000);
+        }
+
+        function hideNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('translate-x-full');
+        }
+
+        // Form Submission
+        document.getElementById('add-product-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const product = {
+                name: document.getElementById('product-name').value,
+                price: document.getElementById('product-price').value,
+                image: document.getElementById('product-image').value,
+                description: document.getElementById('product-description').value,
+                category: document.getElementById('product-category').value,
+                rating: 4.5, // Default rating
+                createdAt: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            let products = JSON.parse(localStorage.getItem('products') || '[]');
+            products.push(product);
+            localStorage.setItem('products', JSON.stringify(products));
+
+            // Show success message
+            showNotification('Product added successfully!');
+            
+            // Clear form
+            this.reset();
+            
+            // Optionally redirect after a delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
